@@ -4,9 +4,10 @@ struct Node{
 	Node* next;
 };
 
+template<typename T>
 class ForwardList{
 private:
-	Node* head;
+	Node<T>* head;
 public:
 	T front(); // Retorna el elemento al comienzo
 	T back(); // Retorna el elemento al final
