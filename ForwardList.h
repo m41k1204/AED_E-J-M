@@ -1,7 +1,3 @@
-#include<iostream>
-
-using namespace std;
-
 template<typename T>
 struct Node{
 	T data;
@@ -25,8 +21,3 @@ public:
 	void sort(); // Implemente un algoritmo de ordenacion con listas enlazadas)
 	void reverse(); // Revierte la lista
 };
-
-int main(){
-	
-	return 0;
-}
