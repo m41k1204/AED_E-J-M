@@ -162,13 +162,17 @@ void ForwardList<T>::showElements(){
 
 template<typename T>
 void ForwardList<T>::removeElements(T value){
-	Node<T>* current = head->next;
+	if(head == nullptr){
+		return;
+	}
+	Node<T>* current = head;
 	while(current->next != nullptr){
 		Node<T>* temp = current->next;
 		if(temp->data == value){
-			current->next = current->next->next;
+			current->next = temp->next;
 			delete temp;
 		}
-		current = current->next;
+		else current = current->next;
 	}
+	//if(head->data == value) pop_front();
 }
