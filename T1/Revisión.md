@@ -1,0 +1,1 @@
+En aqui esta la implementación de la tarea de AED, falta el test4. Pero encuentro cierta trivialidad en los tests integrados, ya que no evaluan los demás métodos de nuestra implementación. Así que todavía faltan hacer mejoras.
