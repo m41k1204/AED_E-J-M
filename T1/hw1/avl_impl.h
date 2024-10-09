@@ -20,9 +20,10 @@ AVLTree<T>::AVLTree() : root(nullptr) {}
 
 template <typename T>
 int AVLTree<T>::height(AVLNode<T>* node) {
-    if (node == nullptr)
+    if (node == nullptr) {
         return -1;
-    return node->height;
+    }
+    return std::max(height(node->left), height(node->right)) + 1;
 }
 
 template <typename T>
@@ -33,6 +34,7 @@ int AVLTree<T>::getBalance(AVLNode<T>* node) {
     return height(node->left) - height(node->right);
 }
 
+//Rotación derecha
 template <typename T>
 AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
     AVLNode<T>* x = y->left;
@@ -47,6 +49,8 @@ AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
     return x;
 }
 
+
+// Rotación izquierda
 template <typename T>
 AVLNode<T>* AVLTree<T>::leftRotate(AVLNode<T>* x) {
     AVLNode<T>* y = x->right;
@@ -61,6 +65,7 @@ AVLNode<T>* AVLTree<T>::leftRotate(AVLNode<T>* x) {
     return y;
 }
 
+// Encontrar el nodo con el valor mínimo
 template <typename T>
 AVLNode<T>* AVLTree<T>::minValueNode(AVLNode<T>* node) {
     AVLNode<T>* current = node;
@@ -72,6 +77,7 @@ AVLNode<T>* AVLTree<T>::minValueNode(AVLNode<T>* node) {
     return current;
 }
 
+// Inserción
 template <typename T>
 AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
     if (node == nullptr)
@@ -87,6 +93,7 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
     node->height = std::max(height(node->left), height(node->right)) + 1;
 
     int balance = getBalance(node);
+
 
     if (balance > 1 && key < node->left->data)
         return rightRotate(node);
@@ -107,6 +114,8 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
     return node;
 }
 
+
+// Eliminar un nodo
 template <typename T>
 AVLNode<T>* AVLTree<T>::remove(AVLNode<T>* root, T key) {
     if (root == nullptr)
@@ -163,6 +172,7 @@ AVLNode<T>* AVLTree<T>::remove(AVLNode<T>* root, T key) {
     return root;
 }
 
+
 // Búsqueda
 template <typename T>
 bool AVLTree<T>::search(AVLNode<T>* node, T key) {
@@ -176,7 +186,7 @@ bool AVLTree<T>::search(AVLNode<T>* node, T key) {
         return search(node->right, key);
 }
 
-// Recorridos
+// Recorrido preorder
 template <typename T>
 void AVLTree<T>::preorder(AVLNode<T>* node, std::vector<T>& ret) {
     if (node == nullptr)
@@ -186,6 +196,7 @@ void AVLTree<T>::preorder(AVLNode<T>* node, std::vector<T>& ret) {
     preorder(node->right, ret);
 }
 
+// Recorrido inorder
 template <typename T>
 void AVLTree<T>::inorder(AVLNode<T>* node, std::vector<T>& ret) {
     if (node == nullptr)
@@ -195,6 +206,7 @@ void AVLTree<T>::inorder(AVLNode<T>* node, std::vector<T>& ret) {
     inorder(node->right, ret);
 }
 
+// Recorrido postorder
 template <typename T>
 void AVLTree<T>::postorder(AVLNode<T>* node, std::vector<T>& ret) {
     if (node == nullptr)
@@ -204,16 +216,7 @@ void AVLTree<T>::postorder(AVLNode<T>* node, std::vector<T>& ret) {
     ret.push_back(node->data);
 }
 
-template <typename T>
-int AVLTree<T>::computeHeight(AVLNode<T>* node) {
-    if (node == nullptr)
-        return -1;
-    int leftHeight = computeHeight(node->left);
-    int rightHeight = computeHeight(node->right);
-    return std::max(leftHeight, rightHeight) + 1;
-}
-
-/// Funciones Públicas
+/// Public functions
 
 template <typename T>
 void AVLTree<T>::insert(T key) {
@@ -253,19 +256,7 @@ std::vector<T> AVLTree<T>::postorderTraversal() {
 
 template <typename T>
 int AVLTree<T>::height() {
-    return computeHeight(root);
-}
-
-template <typename T>
-bool AVLTree<T>::isBalanced(AVLNode<T>* node) {
-    if (node == nullptr)
-        return true;
-
-    int balance = getBalance(node);
-    if (balance > 1 || balance < -1)
-        return false;
-
-    return isBalanced(node->left) && isBalanced(node->right);
+    return height(root);
 }
 
 template <typename T>
