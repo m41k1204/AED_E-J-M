@@ -25,11 +25,6 @@ class hash_table {
         Node<Pair>* data {};
         singly_linked_list<Pair>* ht {};
     public:
-        using difference_type = std::ptrdiff_t;
-        using value_type = Node<Pair>;
-        using pointer = Node<Pair>*;
-        using reference = Node<Pair>&;
-        using iterator_category = forward_iterator_tag;
 
         iterator() = default; // end
         iterator(singly_linked_list<Pair>* ht, int capacity) : ht(ht), capacity(capacity) {
