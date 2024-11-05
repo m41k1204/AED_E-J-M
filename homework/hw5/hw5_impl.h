@@ -79,8 +79,7 @@ std::vector<int> DFS(std::vector<std::vector<int>> const& graph, int from) {
   return ret;
 }
 
-std::vector<std::vector<int>> connected_components(
-  std::vector<std::vector<int>> const& graph) {
+std::vector<std::vector<int>> connected_components(std::vector<std::vector<int>> const& graph) {
   // COMPLETE AQUI
 
   std::vector<std::vector<int>> components;
@@ -110,12 +109,12 @@ std::vector<std::vector<int>> connected_components(
           components.push_back(component);
       }
   }
-  return ret;
+  return components;
 }
 
 int n_connected_components(std::vector<std::vector<int>> const& graph) {
   // COMPLETE AQUI
-  return connectec_components(graph).size();
+  return connected_components(graph).size();
 }
 
 #endif
