@@ -61,7 +61,7 @@ void BST<T>::clear() {
     clear(root);
 }
 
-// Private functions
+// Funciones privadas
 
 template <typename T>
 typename BST<T>::Node* BST<T>::findMin(Node* node) const {
