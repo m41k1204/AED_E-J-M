@@ -1,25 +1,23 @@
 class Solution {
 public:
-    std::vector<std::string> findItinerary(std::vector<std::vector<std::string>>& tickets) {
-        std::unordered_map<std::string, std::multiset<std::string>> graph;
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        unordered_map<string, multiset<string>> graph;
         for (const auto& ticket : tickets) {
             graph[ticket[0]].insert(ticket[1]);
         }
 
-        std::vector<std::string> itinerary;
+        vector<string> itinerary;
         dfs("JFK", graph, itinerary);
-        std::reverse(itinerary.begin(), itinerary.end());
+        reverse(itinerary.begin(), itinerary.end());
         return itinerary;
     }
 
 private:
-    void dfs(const std::string& airport,
-             std::unordered_map<std::string, std::multiset<std::string>>& graph,
-             std::vector<std::string>& itinerary) {
+    void dfs(const string& airport, unordered_map<string, multiset<string>>& graph, vector<string>& itinerary) {
         auto& destinations = graph[airport];
         while (!destinations.empty()) {
             auto next = destinations.begin();
-            std::string nextAirport = *next;
+            string nextAirport = *next;
             destinations.erase(next); 
             dfs(nextAirport, graph, itinerary);
         }
